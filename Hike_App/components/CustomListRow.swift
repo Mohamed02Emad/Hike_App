@@ -8,11 +8,44 @@
 import SwiftUI
 
 struct CustomListRow: View {
+    
+    @State var label : String
+    @State var value : String
+    @State var icon : String
+    @State var website : String? = nil
+    @State var isWebsite : Bool = false
+    @State var iconBackgroundColor : Color
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LabeledContent{
+            if isWebsite{
+                Link(value , destination: URL(string: website!)!)
+            }else{
+                Text(value)
+                    .foregroundColor(.primary)
+                    .fontWeight(.heavy)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+        } label: {
+            HStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8)
+                        .frame(width: 30 , height: 30)
+                        .foregroundColor(iconBackgroundColor)
+                    
+                    Image(systemName: icon)
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                }
+                Text(label)
+            }
+        }
     }
 }
 
 #Preview {
-    CustomListRow()
+    List(0 ..< 3) { item in
+        CustomListRow(label: "Application", value: "App", icon: "apps.iphone", iconBackgroundColor: .blue)
+    }
 }

@@ -46,9 +46,56 @@ struct SettingsView: View {
                 .listRowSeparator(.hidden)
                 .frame(maxWidth: .infinity)
             }
-        
             // MARK: - Section Icons
             // MARK: - Section About
+            Section(
+                header : Text("About The App"),
+                footer: HStack{
+                    Spacer()
+                    Text("copyright @ All right reserved")
+                    Spacer()
+                }
+                    .padding(.vertical , 8)
+            ){
+               CustomListRow(
+                label: "Application",
+                value: "Hike",
+                icon: "apps.iphone",
+                iconBackgroundColor: .blue
+               )
+               CustomListRow(
+                label: "Compatibility",
+                value: "IOS,ipadOS",
+                icon: "info.circle",
+                iconBackgroundColor: .red
+               )
+               CustomListRow(
+                label: "Technology",
+                value: "swift",
+                icon: "swift",
+                iconBackgroundColor: .orange
+               )
+               CustomListRow(
+                label: "Version",
+                value: "1.0",
+                icon: "gear",
+                iconBackgroundColor: .purple
+               )
+               CustomListRow(
+                label: "Developer",
+                value: "Mohamed Emad",
+                icon: "ellipsis.curlybraces",
+                iconBackgroundColor: .mint
+               )
+               CustomListRow(
+                label: "Website",
+                value: "GitHub",
+                icon: "globe",
+                website: "https://github.com/Mohamed02Emad",
+                isWebsite: true,
+                iconBackgroundColor: .indigo
+               )
+            }
         }
     }
 }
