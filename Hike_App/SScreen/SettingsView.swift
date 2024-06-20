@@ -8,6 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    private let alternativeIcons : [String] = [
+    "AppIcon-MagnifyingGlass",
+    "AppIcon-Map",
+    "AppIcon-Mushroom",
+    "AppIcon-Camera",
+    "AppIcon-Backpack",
+    "AppIcon-Campfire"
+    ]
+    
     var body: some View {
         List{
             // MARK: - Section Header
@@ -47,6 +57,42 @@ struct SettingsView: View {
                 .frame(maxWidth: .infinity)
             }
             // MARK: - Section Icons
+            Section(header : Text("Alternate Icons")){
+                
+                ScrollView(.horizontal , showsIndicators : false){
+                    HStack(spacing : 12) {
+                        ForEach(alternativeIcons.indices , id: \.self) { item in
+                            Button{
+                                UIApplication.shared.setAlternateIconName(
+                                    alternativeIcons[item]
+                                ){ error in
+                                    if error == nil {
+                                        
+                                    }
+                                }
+                            }label: {
+                              Image(
+                                "\(alternativeIcons[item])-Preview"
+                              )
+                               .resizable()
+                               .scaledToFit()
+                               .frame(width: 80 , height: 80)
+                               .cornerRadius(16)
+                               .buttonStyle(.borderless) // fore some reason it is required so that the button works inside listView
+                           }
+                        }
+                    }
+                }
+                .padding(.top , 12)
+                
+                Text("Choose your favourite app icon from the collection above.")
+                    .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/ , maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .font(.footnote)
+                    .padding(.bottom , 12)
+            }
+            .listRowSeparator(.hidden)
             // MARK: - Section About
             Section(
                 header : Text("About The App"),
